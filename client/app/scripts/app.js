@@ -38,6 +38,6 @@ angular
             //console.log("authInterceptor is added");
             
             //console.log("authInterceptor is added");
-            //$httpProvider.interceptors.push('authInterceptor');
+            $httpProvider.interceptors.push('authInterceptor');
         });
 

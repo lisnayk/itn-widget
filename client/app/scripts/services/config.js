@@ -8,7 +8,7 @@
  * Constant in the angApp.
  */
 angular.module('angApp')
-  .constant('config', {
+  .value('config', {
       appKey: "AZt2ApZoCo1KXqzP-pGmz5kT46W0DpV7",
       colibriApiUrl: "https://mycolibri.pro/api/testrest/",
       itnApiUrl: "http://api.yii-itn/v1/",

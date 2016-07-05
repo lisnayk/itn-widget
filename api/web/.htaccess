@@ -1,5 +1,5 @@
 Header set Access-Control-Allow-Origin "*"
-Header set Access-Control-Allow-Headers "Authorization"
+Header set Access-Control-Allow-Headers "Authorization, x-requested-with, Content-Type"
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . index.php

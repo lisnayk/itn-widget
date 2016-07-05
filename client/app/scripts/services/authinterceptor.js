@@ -8,16 +8,14 @@
  * Factory in the angApp.
  */
 angular.module('angApp')
-        .factory('authInterceptor', ['$q', '$window', function ($q, $window) {
-
+        .factory('authInterceptor', ['$q', '$window', 'config', function ($q, $window, c) {
                 return {
                     request: function (config) {
-                        
+
                         config.headers = config.headers || {};
-                        console.log(config);
-                        if (config.headers.token) {
-                            config.headers.method = "GET",
-                            config.headers.Authorization = 'Bearer ' + config.token;
+
+                        if (config.headers.Authorization) {
+                            config.headers.Authorization = 'Bearer ' + c.token;
                         }
                         return config;
                     },

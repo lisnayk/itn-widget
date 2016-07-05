@@ -13,9 +13,9 @@ angular.module('angApp')
                     query: {
                         method: 'GET',
                         headers: {
-                            Authorization: "Bearer "+config.token,
-                            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-                        }
+                            Authorization: true,
+                        },
+                        isArray: true,
                     }
                 }
                 );

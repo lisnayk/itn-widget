@@ -14,22 +14,22 @@ class EventsController extends ActiveController {
 
     public $modelClass = 'app\models\Events';
 
-    public function actions() {
-        $actions = parent::actions();
-        unset($actions['options']);
-        unset($actions['post']);
-        return $actions;
-    }
+    /*public function actions() {
+        //$actions = parent::actions();
+        // unset($actions['options']);
+        //unset($actions['post']);
+        //eturn $actions;
+    }*/
 
     public function behaviors() {
         $behaviors = parent::behaviors();
 
         $behaviors['authenticator'] = [
             'class' => HttpBearerAuth::className(),
-            //"except" => ['get','options'], //"delete", "create", "update"],
-            //'only'=>['GET','POST'],
+            "except" => ['options'], //"delete", "create", "update"],
+                //'only'=>['GET','POST'],
         ];
-        
+
         /* $behaviors['verbs'] = [
           'class' => \yii\filters\VerbFilter::className(),
           'actions' => [
@@ -50,14 +50,13 @@ class EventsController extends ActiveController {
     }
 
     public function checkAccess($action, $model = null, $params = []) {
-        $user = \Yii::$app->user->identity;
-        if (!isset($user) || $user->status_id != 1) {
-            throw new \yii\web\ForbiddenHttpException("User is disabled!");
-        }
+         $user = \Yii::$app->user->identity;
+          if (!isset($user) || $user->status_id != 1) {
+          throw new \yii\web\ForbiddenHttpException("User is disabled!");
+          } 
     }
 
-    public function actionOptions() {
-        echo "Api description!";
-    }
-
+    /* public function actionOptions() {
+      echo "Api description!";
+      } */
 }
