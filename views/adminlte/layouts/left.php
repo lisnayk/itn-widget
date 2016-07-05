@@ -60,7 +60,14 @@
                             ],
                         ],
                     ],
+                    ['label' => 'Клиенты', 'icon' => 'glyphicon glyphicon-user',  'url' => '#',
+                        'items'=>[
+                             ['label' => 'Все клиенті', 'icon' => 'glyphicon glyphicon-th-list', 'url' => ['clients/index'],],
+                        ],
+                    ],
                 ],
+                
+                
             ]
         ) ?>
 

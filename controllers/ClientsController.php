@@ -64,8 +64,17 @@ class ClientsController extends Controller
     public function actionCreate()
     {
         $model = new Clients();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        $is_load = false;
+        if ($model->load(Yii::$app->request->post())){
+            if ($model->genAuthKey) {
+                $model->auth_key = Yii::$app->getSecurity()->generateRandomString();
+                $model->access_token = Yii::$app->getSecurity()->generateRandomString();
+            }
+            $is_load = true;
+        }
+                
+        
+        if ($is_load && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -83,8 +92,17 @@ class ClientsController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $is_load = false;
+        if ($model->load(Yii::$app->request->post())){
+            if ($model->genAuthKey) {
+               
+                $model->auth_key = Yii::$app->getSecurity()->generateRandomString();
+                $model->access_token = Yii::$app->getSecurity()->generateRandomString();
+            }
+            $is_load = true;
+        }
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if (  $is_load && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [

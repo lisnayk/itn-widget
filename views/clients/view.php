@@ -33,6 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'sname',
             'fname:ntext',
             'auth_key',
+            'access_token',
             'comment:ntext',
             'status',
             'created',

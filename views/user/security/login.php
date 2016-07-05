@@ -19,7 +19,7 @@ use yii\widgets\ActiveForm;
  * @var dektrium\user\Module           $module
  */
 
-$this->title = Yii::t('user', 'Sign in');
+$this->title = Yii::t('user', 'Авторизация');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-login">

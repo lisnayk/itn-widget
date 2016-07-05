@@ -12,11 +12,12 @@ use Yii;
  * @property string $sname
  * @property string $fname
  * @property string $auth_key
+ * @property string $access_token
  * @property string $comment
  * @property integer $status
  * @property string $created
  * @property string $updated
- *
+ * @property string $genAuthKey
  * @property Logs[] $logs
  */
 class Clients extends \yii\db\ActiveRecord
@@ -24,6 +25,9 @@ class Clients extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    public $genAuthKey = false;
+   
+    
     public static function tableName()
     {
         return 'clients';
@@ -35,12 +39,12 @@ class Clients extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id'], 'required'],
-            [['id', 'status'], 'integer'],
+            [["name","status_id"], 'required'],
+            [['id', 'status_id'], 'integer'],
             [['fname', 'comment'], 'string'],
-            [['created', 'updated'], 'safe'],
+            [['created', 'updated', "genAuthKey"], 'safe'],
             [['name'], 'string', 'max' => 255],
-            [['sname', 'auth_key'], 'string', 'max' => 100],
+            [['sname', 'auth_key',"access_token"], 'string', 'max' => 100],
         ];
     }
 
@@ -50,15 +54,17 @@ class Clients extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'name' => 'Name',
-            'sname' => 'Sname',
-            'fname' => 'Fname',
+            'id' => 'Идентификатор',
+            'genAuthKey' => 'Сгенерировать ключ/токен аутенификации',
+            'name' => 'Название',
+            'sname' => 'Краткое название',
+            'fname' => 'Полное название',
             'auth_key' => 'Auth Key',
-            'comment' => 'Comment',
-            'status' => 'Status',
-            'created' => 'Created',
-            'updated' => 'Updated',
+            'access_token' => 'Access Token',
+            'comment' => 'Коментарий',
+            'status' => 'Статус',
+            'created' => 'Создан',
+            'updated' => 'Обновлен',
         ];
     }
 
@@ -68,5 +74,9 @@ class Clients extends \yii\db\ActiveRecord
     public function getLogs()
     {
         return $this->hasMany(Logs::className(), ['client_id' => 'id']);
+    }
+    
+    public function getStatus(){
+        return $this->hasOne(Statuses::className(), ["id"=>"status_id"]);
     }
 }

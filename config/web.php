@@ -30,11 +30,11 @@ $config = [
 		
 		'user' => [
 			
-			//'identityClass' => 'app\models\User',
+                'identityClass' => 'app\models\User',
 			
-			'enableAutoLogin' => true,
+                    'enableAutoLogin' => true,
 			//'class' => 'app\components\User',
-    		'identityClass' => 'dektrium\user\models\User',
+                    'identityClass' => 'dektrium\user\models\User',
 
 		],
 
