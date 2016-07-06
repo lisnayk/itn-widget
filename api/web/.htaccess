@@ -1,7 +1,6 @@
 Options +FollowSymLinks
 IndexIgnore */*
-#Header set Access-Control-Allow-Origin "*"
-#Header set Access-Control-Allow-Headers "Authorization, x-requested-with, Content-Type"
+
 RewriteEngine on
 
 # if a directory or a file exists, use it directly
