@@ -8,7 +8,7 @@
  * Service in the angApp.
  */
 angular.module('angApp')
-    .service('Clients', ['$resource', 'config', function($resource,config) {
+    .service('Masters', ['$resource', 'config', function($resource,config) {
         var url = config.colibriApiUrl+'user/get-by-employee';
         return $resource(url, {}, {
             'query': {

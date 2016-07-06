@@ -1,33 +1,21 @@
 <div class="jumbotron">
-  <h1>'Allo, 'Allo!</h1>
-  <p class="lead">
-    <img src="images/yeoman.png" alt="I'm Yeoman"><br>
-    Always a pleasure scaffolding your apps.
-  </p>
-  <p><a class="btn btn-lg btn-success" ng-href="#/">Splendid!<span class="glyphicon glyphicon-ok"></span></a></p>
-</div>
+  <h1>ITN My-colybry Wigdet</h1>
+ </div>
 
-<div class="row marketing">
-  <h4>HTML5 Boilerplate</h4>
-  <p>
-    HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.
-  </p>
-
-  <h4>Angular</h4>
-  <p>
-    AngularJS is a toolset for building the framework most suited to your application development.
-  </p>
-
-  <h4>Karma</h4>
-  <p>Spectacular Test Runner for JavaScript.</p>
-
+<div class="row">
+  
   <div>
-    <div ng-repeat="(key, value) in main.data" >
-      <div>{{value.id}} - {{value.name}}</div>
-    </div>
+      <h4>{{main.currentMasterName()}}</h4>
+      <label for="master">Мастер: </label>
+      <select name="master"  ng-model="main.currentMaster">
+          <option ng-repeat="(key, value) in main.mastersList.data" value="{{value.id}}">{{value.name}}</option>
+      </select>
+    
   </div>
+  
   <div>
-    <div ng-repeat="(key, value) in main.clientsList.data" >
+      <h4>  DEVELOPMENT LOGS </h4>
+    <div ng-repeat="(key, value) in main.data" >
       <div>{{value.id}} - {{value.name}}</div>
     </div>
   </div>

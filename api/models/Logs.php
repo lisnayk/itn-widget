@@ -38,10 +38,10 @@ class Logs extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id'], 'required'],
+            [['event_id'], 'required'],
             [['id', 'event_id', 'client_id'], 'integer'],
             [['comment'], 'string'],
-            [['logtime', 'created'], 'safe'],
+            [['logtime', 'created','id'], 'safe'],
             [['remoteIp'], 'string', 'max' => 45],
             [['romoteAddr'], 'string', 'max' => 50],
             [['remoteHost', 'httpAgent'], 'string', 'max' => 255],

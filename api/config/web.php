@@ -68,15 +68,10 @@ $config = [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => [
                         'v1/events',
-                        'v1/test',
-                      
+                        'v1/logs',
+                        'v1/auth'
                     ],
-                ],
-                [
-                    'class' => 'yii\rest\UrlRule',
-                    'controller' => [ 'v1/auth'],
-                    'extraPatterns' => [ 'GET' => 'index'],
-                    'pluralize' => false
+                    
                 ],
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
