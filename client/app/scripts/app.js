@@ -17,6 +17,8 @@ angular
             'ngRoute',
             'ngSanitize',
             'ngTouch',
+            'cfp.loadingBar',
+            'angular-bootstrap-select'
         ])
         .config(function ($routeProvider) {
             $routeProvider
@@ -36,5 +38,9 @@ angular
         })
         .config(function ($httpProvider) {
             $httpProvider.interceptors.push('authInterceptor');
-        });
+        })
+        .config(['cfpLoadingBarProvider', function (cfpLoadingBarProvider) {
+                cfpLoadingBarProvider.includeBar = true;
+                //         cfpLoadingBarProvider.latencyThreshold = 10;
+            }]);
 

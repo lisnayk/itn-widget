@@ -1,22 +1,122 @@
-<div class="jumbotron">
-  <h1>ITN My-colybry Wigdet</h1>
- </div>
+<div class="widget-body">
+    <div class="main-screen" ng-show="main.activeScreen == 0">
+        <div class="row title">
+            <div class="col-xs-12">
+                <h4>Онлайн запись</h4>
+            </div>
+        </div>
+        <hr>
+        <div class="row check-in-data-holder">
+            <div class="col-xs-12">
+                <a ng-if="main.checkInDate > 0" ng-click="main.prevCheckInDate()"><span class="glyphicon glyphicon-chevron-left check-in-date-left"></span></a>
+                <span class="check-in-date">{{main.getDate(main.checkInDate)}}</span>
+                <a ng-click="main.nextCheckInDate()"><span class="glyphicon glyphicon-chevron-right check-in-date-right"></span></a>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-xs-4">
+                <div class="photo-holder">
+                    <img ng-src="{{(main.currentMaster) ? main.currentMaster.photo:''}}"/>
+                </div>
+            </div>    
 
-<div class="row">
-  
-  <div>
-      <h4>{{main.currentMasterName()}}</h4>
-      <label for="master">Мастер: </label>
-      <select name="master"  ng-model="main.currentMaster">
-          <option ng-repeat="(key, value) in main.mastersList.data" value="{{value.id}}">{{value.name}}</option>
-      </select>
-    
-  </div>
-  
-  <div>
-      <h4>  DEVELOPMENT LOGS </h4>
-    <div ng-repeat="(key, value) in main.data" >
-      <div>{{value.id}} - {{value.name}}</div>
+            <div class="col-xs-8">
+                <h4>{{main.currentMaster.name}}</h4>
+                <div class="form-group">
+                    <select ng-model="main.currentMaster" class="form-control" ng-options="option.name for option in  main.mastersList.data track by option.id" ></select>     
+                </div>
+                <hr>
+                <div class="text-center status-list">
+                    <span class="freetime">свободно</span>
+                    <span class="busy">занято</span>
+                </div>
+                <div ng-repeat="item in main.recTimes.data" class="check-in-time">
+                    <div class="clearfix" ng-if="$index % 4 == 0"></div>
+                    <div class="col-xs-3 items" ng-class="{free: item.free || item.free == null }">
+                        <a ng-if="item.free || item.free == null"  ng-click="main.checkIn(item)">{{item.time}}</a>
+                        <span ng-if="!(item.free || item.free == null)">{{item.time}}</span>
+                    </div>
+                </div> 
+            </div>
+        </div>
     </div>
-  </div>
+    <div class="form-screen" ng-show="main.activeScreen == 1" >
+        <div class="row menu-panel">
+            <div class="col-xs-12" ng-click="main.activeScreen = 0">
+                <span class="glyphicon glyphicon-chevron-left" ng-click="main.goBack(1)"></span>
+                Назад
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-xs-4">
+                <div class="photo-holder">
+                    <img ng-src="{{(main.currentMaster) ? main.currentMaster.photo:''}}"/>
+                </div>
+            </div>    
+            <div class="col-xs-8">
+                <h4>{{main.currentMaster.name}}</h4>
+                <hr>
+                Запись на {{main.getDate(main.checkInDate)}} ({{main.checkInTime.time}})
+            </div>
+        </div>
+        <div class="row"> 
+
+            <div class="col-xs-12">
+                <form>
+                    <div class="form-group">
+                        <label for="name">Имя</label>
+                        <input type="text" class="form-control" id="name" placeholder="Имя">
+                    </div>
+                    <div class="form-group">
+                        <label for="lastename">Фамилия</label>
+                        <input type="text" class="form-control" id="lastename" placeholder="Фамилия">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Телефон</label>
+                        <input type="text" id="phone" class="form-control" placeholder="Телефон">
+
+                    </div>
+                    <div class="form-group">
+                        <a class="btn btn-default" ng-click="main.activeScreen = 2">Добавить услугу </a>
+                    </div>
+                    <div class="form-group">
+
+                        <div ng-repeat="item in main.selectedJobs()" class="selectable">
+                            <div ng-click="main.selectJob(item)" ng-class="{ selected: item[3] }">
+                                <span class="glyphicon glyphicon-ok" ></span>
+                                {{item[1]}}({{item[2]}})
+                            </div>
+                        </div> 
+
+                    </div><!-- /input-group -->
+                    <div class="input-group">
+                        <a  class="btn btn-default btn-primary check-in-btn">Записатся</a>
+                    </div><!-- /input-group -->
+
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="jobs-screen" ng-show="main.activeScreen == 2">
+        <div class="row menu-panel">
+            <div class="col-xs-12" ng-click="main.activeScreen = 1">
+                <span class="glyphicon glyphicon-chevron-left" ng-click="main.goBack(1)"></span>
+                Назад
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 job-list">
+                <div ng-repeat="item in main.jobsList.data" class="selectable item" ng-class="{odd: $index % 2 == 0, even : $index % 2 != 0}">
+                    <div  ng-click="main.selectJob(item)" ng-class="{ selected: item[3] }" >
+                        <span class="glyphicon glyphicon-ok" ng-if="item[3]" ></span>
+                        {{item[1]}}({{item[2]}})
+                    </div>
+                </div> 
+            </div>
+        </div>
+
+    </div>
 </div>
