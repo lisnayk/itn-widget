@@ -86,7 +86,7 @@ window.onload = function() {
     parent.style.margin = "5px";
     parent.style.bottom = "0px";
 
-    iframe.src = "http://dist/";
+    iframe.src = "http://client.itnavigator.pp.ua:88/";
     iframe.frameborder="0";
     iframe.style.width = "100%";
     iframe.style.height = "100%";
