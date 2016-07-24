@@ -38,7 +38,7 @@ angular.module('angApp')
                     return date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
                 }
                 main.checkIn = function (item) {
-                    console.log(item);
+                    //console.log(item);
                     main.checkInTime = item;
                     main.activeScreen = 1;
                 }
@@ -78,7 +78,7 @@ angular.module('angApp')
                     }
                     function handleResolve(data) {
                         main.recTimes = data;
-                        console.log(data);
+                        //console.log(data);
                     }
                     function handleReject() {
                         alert("Oops, data could not be loaded.");
@@ -96,12 +96,12 @@ angular.module('angApp')
                                 ).finally(handleFinally)
                     }
                     function handleResolve(data) {
-                        console.log(data);
+                        //console.log(data);
                         for (var key in data.data) {
                             data.data[key].push(false);
                         }
                         main.jobsList = data;
-                        console.log(data);
+                        //console.log(data);
                     }
                     function handleReject() {
                         alert("Oops, data could not be loaded.");
@@ -124,7 +124,7 @@ angular.module('angApp')
                     }).$promise.then(function (data) {
 
                         main.mastersList = data;
-                        console.log(data);
+                        //console.log(data);
                         if (main.mastersList && main.mastersList.data.length > 0) {
                             main.currentMaster = main.mastersList.data[0];
                         }
