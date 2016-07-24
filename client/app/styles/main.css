@@ -1,4 +1,14 @@
 /* Widget styles */
+.loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -75px 0px 0px -75px;
+}
+.loader .glyphicon {
+    color: #fb9eb0;
+    font-size: 150px;
+}
 .title h4 {
     text-align: center;
     font-size: 1.5em;
@@ -20,17 +30,22 @@
     text-align: center;
     padding: 2px 0;
 }
-.check-in-time .items a{
-    text-decoration: none;
+.check-in-time .items div{
     color: black;
     font-weight: bold;
 }
 .check-in-time .items.free{
     background-color: #ffd2dd;
+    cursor: pointer;
 }
 .check-in-btn {
     background-color: #ffd2dd;
     border: 0px;
+}
+.check-in-btn:hover {
+    color: #333;
+    background-color: #fb9eb0;
+    border-color: #ffd2dd;
 }
 .check-in-data-holder {
     text-align: center;
@@ -39,12 +54,24 @@
 .check-in-date-left,
 .check-in-date-right {
     padding: 10px;
+    cursor: pointer;
 }
 .menu-panel {
     background-color: #fb9eb0;
     font-size: 1.8em;
     padding: 5px;
     margin-bottom: 10px;
+}
+.menu-panel .button {
+    padding: 5px 10px;
+    cursor: pointer;
+      color: white;
+}
+.menu-panel .title {
+    color: white;
+}
+.job-list .item {
+    cursor: pointer;
 }
 .job-list .item.even {
     background: #eee;
@@ -54,6 +81,13 @@
     background: #fff;
     padding: 8px 10px;
    
+}
+.form-job-list {
+    font-size: 1.3em;
+}
+.form-job-list .delete {
+    cursor: pointer;
+    
 }
 
 span.freetime:before, span.busy:before {
@@ -70,3 +104,41 @@ span.freetime:before, span.busy:before {
 span.busy:before {
     background-color: #EC94AC;
 }
+.finish-message {
+    font-size: 1.5em;
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 20%;
+    text-align: center;
+}
+/* Animation */
+.animate-show {
+  opacity: 1;
+}
+.animate-show.ng-hide-add
+{
+    transition: all linear 5s;
+}
+.animate-show.ng-hide-remove {
+    transition: all linear 5s;
+}
+.animate-show.ng-hide {
+  opacity: 0;
+}
+
+.animate-show.ng-hide-add, .my-element.ng-hide-remove {
+  /* this is required as of 1.3x to properly
+     apply all styling in a show/hide animation */
+  transition: 0s linear all;
+}
+
+.animate-show.ng-hide-add-active,
+.animate-show.ng-hide-remove-active {
+  /* the transition is defined in the active class */
+  transition: 1s linear all;
+}
+
+.animate-show.ng-hide-add { display: none; }
+.animate-show.ng-hide-add.ng-hide-add-active {  }
+.animate-show.ng-hide-remove {  }
+.animate-showt.ng-hide-remove.ng-hide-remove-active {  }

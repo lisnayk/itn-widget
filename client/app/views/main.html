@@ -1,5 +1,12 @@
 <div class="widget-body">
-    <div class="main-screen" ng-show="main.activeScreen == 0">
+    <!--LOADER-->
+    <div class="main-screen animate-show" ng-show="main.activeScreen == -1">
+        <div class="loader" title="Загрузка ...">
+            <span class="glyphicon glyphicon-time"></span>
+        </div>
+    </div>
+    <!--MAIN SVREEN-->
+    <div class="main-screen animate-show" ng-show="main.activeScreen == 0">
         <div class="row title">
             <div class="col-xs-12">
                 <h4>Онлайн запись</h4>
@@ -34,18 +41,19 @@
                 <div ng-repeat="item in main.recTimes.data" class="check-in-time">
                     <div class="clearfix" ng-if="$index % 4 == 0"></div>
                     <div class="col-xs-3 items" ng-class="{free: item.free || item.free == null }">
-                        <a ng-if="item.free || item.free == null"  ng-click="main.checkIn(item)">{{item.time}}</a>
-                        <span ng-if="!(item.free || item.free == null)">{{item.time}}</span>
+                        <div ng-if="item.free || item.free == null"  ng-click="main.checkIn(item)">{{item.time}}</div>
+                        <div ng-if="!(item.free || item.free == null)">{{item.time}}</div>
                     </div>
                 </div> 
             </div>
         </div>
     </div>
-    <div class="form-screen" ng-show="main.activeScreen == 1" >
+    <!--FORM SCREEN-->
+    <div class="form-screen animate-show" ng-show="main.activeScreen == 1" >
         <div class="row menu-panel">
-            <div class="col-xs-12" ng-click="main.activeScreen = 0">
+            <div class="button" ng-click="main.activeScreen = 0">
                 <span class="glyphicon glyphicon-chevron-left" ng-click="main.goBack(1)"></span>
-                Назад
+                <span class="title">Назад</span>
             </div>
         </div>
 
@@ -59,64 +67,76 @@
             <div class="col-xs-8">
                 <h4>{{main.currentMaster.name}}</h4>
                 <hr>
-                Запись на {{main.getDate(main.checkInDate)}} ({{main.checkInTime.time}})
+                <h4>Запись на {{main.getDate(main.checkInDate)}} ({{main.checkInTime.time}})</h4>
             </div>
         </div>
         <div class="row"> 
 
             <div class="col-xs-12">
-                <form>
+                <form ng-submit="main.activeScreen = 3">
                     <div class="form-group">
                         <label for="name">Имя</label>
-                        <input type="text" class="form-control" id="name" placeholder="Имя">
+                        <input ng-model="main.clientReguest.name" type="text" class="form-control" id="name" placeholder="Имя" required="">
                     </div>
                     <div class="form-group">
                         <label for="lastename">Фамилия</label>
-                        <input type="text" class="form-control" id="lastename" placeholder="Фамилия">
+                        <input ng-model="main.clientReguest.lastname"  type="text" class="form-control" id="lastename" placeholder="Фамилия" required="">
                     </div>
                     <div class="form-group">
-                        <label for="phone">Телефон</label>
-                        <input type="text" id="phone" class="form-control" placeholder="Телефон">
+                        <label for="phone">Телефон (формат xxx-xxx-xx-xx)</label>
+                        <input ng-model="main.clientReguest.phone"  type="text" id="phone" class="form-control" placeholder="Телефон" pattern="^\d{3}-\d{3}-\d{2}-\d{2}$" required>
 
                     </div>
                     <div class="form-group">
-                        <a class="btn btn-default" ng-click="main.activeScreen = 2">Добавить услугу </a>
+                        <a class="btn btn-default" ng-click="main.activeScreen = 2"><span class="glyphicon glyphicon-edit"></span> Услугу </a>
                     </div>
                     <div class="form-group">
 
-                        <div ng-repeat="item in main.selectedJobs()" class="selectable">
-                            <div ng-click="main.selectJob(item)" ng-class="{ selected: item[3] }">
-                                <span class="glyphicon glyphicon-ok" ></span>
-                                {{item[1]}}({{item[2]}})
+                        <div ng-repeat="item in main.selectedJobs()" class="selectable form-job-list">
+                            <div  ng-class="{ selected: item[3] }">
+                                <span class="glyphicon glyphicon-remove-circle delete" ng-click="main.selectJob(item)"></span>
+                                <span class="title">{{item[1]}}({{item[2]}})</span>
                             </div>
                         </div> 
 
                     </div><!-- /input-group -->
                     <div class="input-group">
-                        <a  class="btn btn-default btn-primary check-in-btn">Записатся</a>
+                        <input value="Записатся" type="submit" class="btn btn-default btn-primary btn-lg check-in-btn" />
                     </div><!-- /input-group -->
 
                 </form>
             </div>
         </div>
     </div>
-    <div class="jobs-screen" ng-show="main.activeScreen == 2">
+    <!--SELECT SCREEN-->
+    <div class="jobs-screen animate-show" ng-show="main.activeScreen == 2">
         <div class="row menu-panel">
-            <div class="col-xs-12" ng-click="main.activeScreen = 1">
-                <span class="glyphicon glyphicon-chevron-left" ng-click="main.goBack(1)"></span>
-                Назад
+            <div class="button" ng-click="main.activeScreen = 1">
+                <span class="glyphicon glyphicon-check" ng-click="main.goBack(1)"></span>
+                <span class="title">Выбрать</span>
             </div>
         </div>
         <div class="row">
             <div class="col-xs-12 job-list">
-                <div ng-repeat="item in main.jobsList.data" class="selectable item" ng-class="{odd: $index % 2 == 0, even : $index % 2 != 0}">
-                    <div  ng-click="main.selectJob(item)" ng-class="{ selected: item[3] }" >
+                <div ng-repeat="item in main.jobsList.data" ng-click="main.selectJob(item)" class="selectable item" ng-class="{odd: $index % 2 == 0, even : $index % 2 != 0}">
+                    <div ng-class="{ selected: item[3] }" >
                         <span class="glyphicon glyphicon-ok" ng-if="item[3]" ></span>
-                        {{item[1]}}({{item[2]}})
+                        {{item[1]}} ({{item[2]}} минут)
                     </div>
                 </div> 
             </div>
         </div>
 
+    </div>
+    <!--FINISH SCREEN-->
+    <div class="finish-screen animate-show" ng-show="main.activeScreen == 3">
+        <div class="row menu-panel">
+            <div class="button" ng-click="main.reload()">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+                <span class="title">Записатся онлайн</span>
+            </div>
+        </div>
+        <div class="finish-message">Ваш запрос в обработке. Ожидайте звонка менеджера.</div>
+        
     </div>
 </div>
