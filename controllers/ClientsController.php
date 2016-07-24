@@ -3,7 +3,7 @@
 namespace app\controllers;
 
 use Yii;
-use app\Models\Clients;
+use app\models\Clients;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
